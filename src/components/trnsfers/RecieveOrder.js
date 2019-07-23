@@ -4,11 +4,12 @@ import { Row, Col, Input, Typography, Button } from "antd";
 
 class RecieveOrder extends Component {
   render() {
-    return (
+    const { Title } = Typography
+     return (
       <div>
         <Row>
           <Col span={16}>
-            <Title>Transfer</Title>
+            <Title>Recieve Transfer</Title>
           </Col>
           <Col span={6}>
             <Button>Recieve Transfer</Button>

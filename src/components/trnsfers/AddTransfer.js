@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Row, Col, Input, Typography, Button, Modal, Checkbox } from "antd";
 
 class AddTransfer extends Component {
   state = {
     searchedItem: "",
     visible: false,
-    checkedList: []
+    checkedList: [],
+    finalArr:[]
   };
 
   showModal = () => {
@@ -17,6 +19,18 @@ class AddTransfer extends Component {
 
   handleOk = e => {
     console.log(e);
+    const { checkedList, finalArr } = this.state;
+   checkedList.map(item => {
+     return finalArr.includes(item) ? null: finalArr.push(item)
+    //  if(finalArr.includes(item)){
+    //    return null
+    //  }
+    //  else{
+
+    //   return finalArr.push(item)
+    //  }
+   })
+
     this.setState({
       visible: false
     });
@@ -41,6 +55,10 @@ class AddTransfer extends Component {
 
     console.log(`checked = ${e.target.value}`);
   };
+
+  onSaveModal = (evt) => {
+   
+  }
   
 
   search = evt => {
@@ -59,7 +77,7 @@ class AddTransfer extends Component {
     console.log("state is....", this.state);
     const { Title, Text } = Typography;
     const { products } = this.props.product;
-    const { result, text, checkedList, visible } = this.state;
+    const { result, text, finalArr, visible } = this.state;
     const productsToSeach = text ? result : products;
     return (
       <div>
@@ -111,24 +129,25 @@ class AddTransfer extends Component {
         </Modal>
        { /* Model ends here */}
 
-        {checkedList.length && !visible
-          ? checkedList.map(item => {
+        {finalArr.length && !visible
+          ? finalArr.map(item => {
               return (
                 <div>
-                  <Row type="flex" justify="start">
-                    <Col span={12} offset={4}>
+                  <Row >
+                    <Col span={12} offset={1}>
                       {item.name}
                     </Col>
                     <Col span={2}>
                       <Input type="text" autoFocus />
                     </Col>
                   </Row>
+                  <Button>Cancel</Button>
+                  <Link to = {`/transfer/${item.id}`}><Button type = "primary">Save </Button></Link>
                 </div>
               );
             })
           : null}
 
-          <Button type = "primary">Save </Button>
       </div>
     );
   }
