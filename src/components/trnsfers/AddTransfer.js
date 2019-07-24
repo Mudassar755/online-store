@@ -2,14 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Row, Col, Input, Typography, Button, Modal, Checkbox } from "antd";
+import { get_products, recieve_transfer } from '../../Redux/Actions/transferActions'
+import store from '../../Redux/Store'
 
 class AddTransfer extends Component {
   state = {
     searchedItem: "",
     visible: false,
     checkedList: [],
-    finalArr:[]
+    finalArr:[],
+    ordersArr:[]
   };
+
+  componentDidMount(){
+    this.props.get_products()
+  }
 
   showModal = () => {
     this.setState({
@@ -22,13 +29,6 @@ class AddTransfer extends Component {
     const { checkedList, finalArr } = this.state;
    checkedList.map(item => {
      return finalArr.includes(item) ? null: finalArr.push(item)
-    //  if(finalArr.includes(item)){
-    //    return null
-    //  }
-    //  else{
-
-    //   return finalArr.push(item)
-    //  }
    })
 
     this.setState({
@@ -57,7 +57,12 @@ class AddTransfer extends Component {
   };
 
   onSaveModal = (evt) => {
-   
+   const { finalArr } = this.state
+    this.props.recieve_transfer(finalArr)
+  //  store.dispatch({
+  //    type:'RECIEVE_ORDER',
+  //    orders:this.state.finalArr
+  //  })
   }
   
 
@@ -70,7 +75,6 @@ class AddTransfer extends Component {
       return lowerItem.substring(0, lowerText.length).indexOf(lowerText) !== -1;
     });
     this.setState({ result, text });
-    console.log(result);
   };
 
   render() {
@@ -79,6 +83,7 @@ class AddTransfer extends Component {
     const { products } = this.props.product;
     const { result, text, finalArr, visible } = this.state;
     const productsToSeach = text ? result : products;
+    let orderNumber = 0;
     return (
       <div>
         <Row>
@@ -141,12 +146,13 @@ class AddTransfer extends Component {
                       <Input type="text" autoFocus />
                     </Col>
                   </Row>
-                  <Button>Cancel</Button>
-                  <Link to = {`/transfer/${item.id}`}><Button type = "primary">Save </Button></Link>
                 </div>
               );
             })
-          : null}
+            : null}
+            
+            <Button>Cancel</Button>
+            <Link to = {`/transfer/${orderNumber +1}`}><Button type = "primary" onClick = { this.onSaveModal }>Save </Button></Link>
 
       </div>
     );
@@ -159,5 +165,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { get_products, recieve_transfer }
 )(AddTransfer);

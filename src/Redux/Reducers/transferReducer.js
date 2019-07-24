@@ -1,3 +1,10 @@
+import {
+  ADD_TRANSFER,
+  SHOW_TRANSFERS,
+  GET_PRODUCT,
+  RECIEVE_ORDER
+} from "../Actions/types";
+
 import uuid from "uuid";
 const initialState = {
   products: [
@@ -25,10 +32,32 @@ const initialState = {
   ],
   isLoading: false,
   isError: null,
+  items: [1,2]
 };
 
 export default function orderReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_PRODUCT:
+      return {
+        ...state
+      };
+    case ADD_TRANSFER:
+      return {
+        ...state
+      };
+
+    case SHOW_TRANSFERS:
+      return {
+        ...state,
+      };
+
+    case RECIEVE_ORDER:
+      
+      return {
+        ...state,
+        items:action.data
+      };
+
     default:
       return state;
   }

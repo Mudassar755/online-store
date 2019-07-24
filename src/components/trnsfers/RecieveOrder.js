@@ -5,8 +5,12 @@ import { Row, Col, Input, Typography, Button } from "antd";
 class RecieveOrder extends Component {
   render() {
     const { Title } = Typography
+    const {items } = this.props.recieveItem;
      return (
       <div>
+        {items.map(item => {
+          return <h1>{ item.name }, { item.qty} </h1>
+        })}
         <Row>
           <Col span={16}>
             <Title>Recieve Transfer</Title>
@@ -20,4 +24,8 @@ class RecieveOrder extends Component {
   }
 }
 
-export default connect()(RecieveOrder);
+const mapStateToProps = (state) => ({
+  recieveItem:state.transfer
+})
+
+export default connect(mapStateToProps, null)(RecieveOrder);
