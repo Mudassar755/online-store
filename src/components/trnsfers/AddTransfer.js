@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Row, Col, Input, Typography, Button, Modal, Checkbox } from "antd";
-import { get_products, recieve_transfer } from '../../Redux/Actions/transferActions'
+import { get_products, add_transfer } from '../../Redux/Actions/transferActions'
 import store from '../../Redux/Store'
 
 class AddTransfer extends Component {
@@ -58,7 +58,7 @@ class AddTransfer extends Component {
 
   onSaveModal = (evt) => {
    const { finalArr } = this.state
-    this.props.recieve_transfer(finalArr)
+    this.props.add_transfer(finalArr)
   //  store.dispatch({
   //    type:'RECIEVE_ORDER',
   //    orders:this.state.finalArr
@@ -165,5 +165,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { get_products, recieve_transfer }
+  { get_products, add_transfer }
 )(AddTransfer);

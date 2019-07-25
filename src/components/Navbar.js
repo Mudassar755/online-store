@@ -10,6 +10,9 @@ class Navbar extends Component {
         <Link to="/transfers">
           <Button>Transfers</Button>
         </Link>
+        <Link to="/orders">
+          <Button>Orders</Button>
+        </Link>
       </div>
     );
   }

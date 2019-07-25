@@ -1,16 +1,17 @@
 import { ADD_TRANSFER, GET_PRODUCT, RECIEVE_ORDER, SHOW_TRANSFERS} from './types'
 
-export const add_transfer = () => ({
-    type: ADD_TRANSFER
+export const add_transfer = (data) => ({
+    type: ADD_TRANSFER,
+    data
 })
 
-export const show_transfer = (id) => ({
+export const show_transfer = (transfer) => ({
     type: SHOW_TRANSFERS,
-    payload:id
+    transfer
 })
-export const recieve_transfer = (data) => ({
+export const recieve_transfer = (item) => ({
     type: RECIEVE_ORDER,
-    data
+    item
 })
 export const get_products = () => ({
     type: GET_PRODUCT

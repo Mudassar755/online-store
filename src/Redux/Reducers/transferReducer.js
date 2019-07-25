@@ -12,27 +12,36 @@ const initialState = {
       id: uuid(),
       name: "samsung",
       desc: "brand new mobile phone",
-      orderDate: "2019-03-15",
+      orderDate: "2019/03/15",
       qty: "5"
     },
     {
       id: uuid(),
-      name: "glay",
+      name: "Nokia",
+      desc: "brand new mobile phone",
+      orderDate: "2019/05/15",
+      qty: "5"
+    },
+    {
+      id: uuid(),
+      name: "galaxy",
       desc: "brand new led",
-      orderDate: "2017-05-25",
+      orderDate: "2017/05/25",
       qty: "2"
     },
     {
       id: uuid(),
       name: "iPhone",
       desc: "brand new iPhone",
-      orderDate: "2019-07-13",
+      orderDate: "2019/07/13",
       qty: "3"
     }
   ],
   isLoading: false,
   isError: null,
-  items: [1,2]
+  orderedItems: [],
+  receivedItems: [],
+  transfers: []
 };
 
 export default function orderReducer(state = initialState, action) {
@@ -43,19 +52,21 @@ export default function orderReducer(state = initialState, action) {
       };
     case ADD_TRANSFER:
       return {
-        ...state
+        ...state,
+        orderedItems: action.data
       };
 
     case SHOW_TRANSFERS:
       return {
         ...state,
+        transfers:action.transfer
       };
 
     case RECIEVE_ORDER:
-      
+
       return {
         ...state,
-        items:action.data
+        receivedItems: action.item
       };
 
     default:
