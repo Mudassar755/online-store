@@ -100,7 +100,7 @@ class Orders extends Component {
             </Button>
           </Col>
         </Row>
-        {menu === "day"
+        {ordersByDate && menu === 'day'
           ? ordersByDate.map(item => {
               return (
                 <div>
@@ -111,7 +111,7 @@ class Orders extends Component {
               );
             })
           : null}
-           {menu === "month"
+           {ordersByMonth && menu === "month"
           ? ordersByMonth.map(item => {
               return (
                 <div>
@@ -122,7 +122,7 @@ class Orders extends Component {
               );
             })
           : null}
-           {menu === "year"
+           { ordersByYear && menu === "year"
           ? ordersByYear.map(item => {
               return (
                 <div>
